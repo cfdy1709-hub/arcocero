@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ArcoCero — Equipamiento para porteros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="catalog.js"></script>
+<style>
+  :root{
+    --bg:#12130F;
+    --bg-panel:#1B1D17;
+    --ink:#F3F4ED;
+    --ink-soft:#9A9C8F;
+    --volt:#C6FF3D;
+    --volt-dark:#9ED61F;
+    --line:#2D2F27;
+    --card:#191B15;
+    --danger:#E9553C;
+    box-sizing:border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top: env(safe-area-inset-top, 0px); scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.5;overflow-x:hidden;}
+  h1,h2,h3,.display{font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:-0.01em;margin:0;}
+  a{color:inherit;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px;}
+
+  /* Topbar */
+  .topbar{position:sticky;top:0;z-index:40;background:rgba(18,19,15,0.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px);}
+  .topbar-inner{max-width:1200px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);}
+  .logo svg{width:36px;height:36px;flex:none;}
+  .logo-word{font-family:'Archivo Black',sans-serif;font-size:1.3rem;letter-spacing:0.01em;}
+  .logo-tag{display:block;font-size:0.6rem;color:var(--ink-soft);letter-spacing:0.08em;margin-top:1px;}
+  nav.main-nav{display:flex;gap:26px;font-size:0.9rem;font-weight:600;}
+  nav.main-nav a{text-decoration:none;color:var(--ink-soft);padding:6px 0;border-bottom:2px solid transparent;}
+  nav.main-nav a:hover{color:var(--ink);border-color:var(--volt);}
+  .cart-btn{position:relative;background:var(--volt);color:#12130F;border:none;border-radius:4px;padding:11px 18px;display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;font-size:0.88rem;}
+  .cart-badge{position:absolute;top:-7px;right:-7px;background:var(--danger);color:#fff;font-size:0.65rem;font-weight:700;min-width:18px;height:18px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+
+  /* Hero */
+  .hero{padding:58px 0 46px;border-bottom:1px solid var(--line);}
+  .hero-inner{display:grid;grid-template-columns:1.1fr 0.9fr;gap:44px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--volt);color:#12130F;padding:6px 14px;border-radius:3px;font-size:0.76rem;font-weight:800;letter-spacing:0.04em;margin-bottom:22px;}
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem);line-height:1.02;}
+  .hero h1 span{color:var(--volt);}
+  .hero p.lede{font-size:1.05rem;color:var(--ink-soft);max-width:48ch;margin-top:18px;}
+  .hero-ctas{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:4px;font-weight:700;font-size:0.9rem;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+  .btn-primary{background:var(--volt);color:#12130F;}
+  .btn-primary:hover{background:var(--volt-dark);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--ink);}
+  .hero-visual{position:relative;height:340px;}
+  .glove-badge{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:6px;box-shadow:0 20px 36px -22px rgba(0,0,0,0.6);}
+  .glove-badge span{font-size:0.72rem;color:var(--ink-soft);text-align:center;}
+  .glove-badge.g1{width:160px;top:0;right:30px;transform:rotate(-3deg);}
+  .glove-badge.g2{width:140px;top:170px;right:220px;transform:rotate(4deg);}
+  .glove-badge.g3{width:150px;top:220px;right:-10px;transform:rotate(5deg);}
+
+  section{padding:56px 0;}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:28px;flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.5rem,3vw,2rem);}
+  .section-head p{color:var(--ink-soft);max-width:52ch;margin-top:6px;font-size:0.92rem;}
+
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;}
+  .tab{border:1px solid var(--line);background:var(--card);padding:9px 18px;border-radius:999px;font-size:0.84rem;font-weight:700;cursor:pointer;color:var(--ink-soft);}
+  .tab.active{background:var(--volt);border-color:var(--volt);color:#12130F;}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;}
+  .card-art{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#1E201A;position:relative;overflow:hidden;}
+  .card-art svg{width:58%;height:58%;}
+  .card-art img{width:100%;height:100%;object-fit:cover;}
+  .card-brand{position:absolute;top:10px;left:10px;font-size:0.66rem;font-weight:800;letter-spacing:0.04em;color:var(--volt);text-transform:uppercase;}
+  .card-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .card-body h3{font-size:0.95rem;font-weight:800;text-transform:none;font-family:'Inter',sans-serif;letter-spacing:0;}
+  .card-desc{font-size:0.8rem;color:var(--ink-soft);flex:1;}
+  .card-variant{display:flex;gap:6px;align-items:center;font-size:0.76rem;color:var(--ink-soft);}
+  .card-variant select{background:var(--bg-panel);color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:5px 8px;font-size:0.78rem;}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+  .price{font-weight:800;font-size:1.05rem;}
+  .price small{display:block;font-weight:500;font-size:0.68rem;color:var(--ink-soft);}
+  .add-btn{background:var(--volt);color:#12130F;border:none;border-radius:4px;padding:9px 14px;font-size:0.8rem;font-weight:800;cursor:pointer;}
+  .add-btn:hover{background:var(--volt-dark);}
+  .stock-tag{font-size:0.68rem;color:#7FB84A;}
+  .stock-tag.low{color:var(--danger);}
+
+  /* Combo / promo */
+  .promo{background:var(--card);border:1px solid var(--volt);border-radius:10px;padding:40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:30px;align-items:center;}
+  .promo h2{font-size:clamp(1.5rem,3.2vw,2.1rem);}
+  .promo p{color:var(--ink-soft);max-width:44ch;margin-top:12px;font-size:0.92rem;}
+  .promo-price{display:flex;align-items:baseline;gap:12px;margin-top:18px;}
+  .promo-price .now{font-size:2.1rem;font-weight:800;color:var(--volt);}
+  .promo-price .was{font-size:1rem;color:var(--ink-soft);text-decoration:line-through;}
+  .promo-items{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .promo-items li{font-size:0.88rem;color:var(--ink-soft);display:flex;gap:8px;align-items:center;}
+  .promo-items li::before{content:"";width:6px;height:6px;background:var(--volt);border-radius:1px;flex:none;}
+
+  /* Why */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+  .why-item{border-top:2px solid var(--volt);padding-top:14px;}
+  .why-item h3{font-size:0.9rem;font-family:'Inter',sans-serif;font-weight:800;text-transform:none;letter-spacing:0;margin-bottom:6px;}
+  .why-item p{color:var(--ink-soft);font-size:0.84rem;}
+
+  footer{background:#0D0E0A;border-top:1px solid var(--line);padding:48px 0 26px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px;margin-bottom:34px;}
+  footer h4{font-size:0.8rem;font-weight:800;margin-bottom:14px;color:#fff;letter-spacing:0.03em;}
+  footer a{display:block;color:#817E6E;text-decoration:none;font-size:0.86rem;margin-bottom:8px;}
+  footer a:hover{color:var(--volt);}
+  .foot-bottom{border-top:1px solid var(--line);padding-top:16px;font-size:0.76rem;color:#5E5C50;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* Cart drawer */
+  .overlay{position:fixed;inset:0;background:rgba(10,11,8,0.6);opacity:0;pointer-events:none;transition:opacity .2s;z-index:60;}
+  .overlay.open{opacity:1;pointer-events:auto;}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:92vw;background:var(--bg-panel);z-index:70;transform:translateX(100%);transition:transform .25s ease;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);border-left:1px solid var(--line);}
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{padding:20px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;}
+  .drawer-head h3{font-size:1rem;}
+  .drawer-close{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--ink-soft);}
+  .drawer-items{flex:1;overflow-y:auto;padding:14px 22px;}
+  .drawer-item{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
+  .drawer-item .di-art{width:48px;height:48px;border-radius:6px;background:#1E201A;flex:none;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .drawer-item .di-art svg{width:68%;height:68%;}
+  .drawer-item .di-art img{width:100%;height:100%;object-fit:cover;}
+  .drawer-item .di-info{flex:1;}
+  .drawer-item .di-info b{font-size:0.86rem;}
+  .drawer-item .di-info small{display:block;color:var(--ink-soft);font-size:0.72rem;margin-top:2px;}
+  .di-qty{display:flex;align-items:center;gap:8px;margin-top:5px;}
+  .qty-btn{width:22px;height:22px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:4px;cursor:pointer;font-size:0.85rem;line-height:1;}
+  .di-price{font-weight:800;font-size:0.9rem;}
+  .drawer-empty{padding:40px 10px;text-align:center;color:var(--ink-soft);font-size:0.88rem;}
+  .drawer-foot{padding:18px 22px;border-top:1px solid var(--line);}
+  .drawer-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:800;margin-bottom:14px;}
+  .checkout-btn{width:100%;background:var(--volt);color:#12130F;border:none;padding:14px;border-radius:4px;font-weight:800;cursor:pointer;font-size:0.92rem;}
+
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#F4F5EF; --bg-panel:#fff; --ink:#15160F; --ink-soft:#5D5F52; --card:#fff; --line:#E1E1D5;
+    }
+    .card-art{background:#ECEDE3;}
+    .eyebrow{color:#12130F;}
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F5EF; --bg-panel:#fff; --ink:#15160F; --ink-soft:#5D5F52; --card:#fff; --line:#E1E1D5;
+  }
+
+  /* ---------- Vista Nosotros (misma página, sin archivo aparte) ---------- */
+  #view-nosotros{display:none;}
+  #view-nosotros .about-wrap{max-width:900px;margin:0 auto;padding:0 28px;}
+  .back-link{font-size:0.86rem;font-weight:700;color:var(--ink-soft);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:26px;cursor:pointer;background:none;border:none;}
+  .back-link:hover{color:var(--volt);}
+  .about-block{border-top:1px solid var(--line);padding:40px 0;}
+  .about-block h2{font-size:clamp(1.3rem,2.6vw,1.7rem);margin-bottom:16px;}
+  .about-block p{color:var(--ink-soft);max-width:70ch;font-size:0.95rem;}
+  .about-block p + p{margin-top:12px;}
+  .stat-row{display:flex;gap:24px;flex-wrap:wrap;margin-top:24px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 20px;min-width:140px;}
+  .stat b{display:block;font-family:'Archivo Black',sans-serif;font-size:1.5rem;color:var(--volt);}
+  .stat span{font-size:0.76rem;color:var(--ink-soft);}
+  .profile-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:28px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center;margin-top:20px;}
+  .avatar{width:92px;height:92px;border-radius:50%;background:var(--bg-panel);border:2px solid var(--volt);display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden;}
+  .avatar img{width:100%;height:100%;object-fit:cover;}
+  .profile-info h3{font-size:1.1rem;font-weight:800;}
+  .profile-info .role{color:var(--volt);font-size:0.84rem;font-weight:700;margin-top:2px;}
+  .profile-meta{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:14px;}
+  .profile-meta div{font-size:0.85rem;}
+  .profile-meta b{display:block;color:var(--ink-soft);font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:2px;}
+  .profile-meta a,.profile-meta span{color:var(--ink);text-decoration:none;}
+  .profile-meta a{border-bottom:1px solid var(--line);}
+  .profile-meta a:hover{color:var(--volt);border-color:var(--volt);}
+  @media (max-width:640px){
+    .profile-card{grid-template-columns:1fr;text-align:center;}
+    .profile-meta{justify-content:center;}
+  }
+
+  /* ---------- Vista Guía de tallas ---------- */
+  #view-tallas{display:none;}
+  .size-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px;}
+  .size-card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .size-card img{width:100%;display:block;background:#fff;}
+  .size-card .size-label{padding:12px 16px;font-size:0.85rem;font-weight:700;color:var(--ink-soft);}
+  @media (max-width:900px){
+    .size-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Vista Medios de pago ---------- */
+  #view-pagos{display:none;}
+  .pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:10px;}
+  .pay-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;display:flex;gap:14px;align-items:flex-start;}
+  .pay-icon{width:38px;height:38px;border-radius:8px;background:var(--bg-panel);border:1px solid var(--volt);display:flex;align-items:center;justify-content:center;flex:none;}
+  .pay-icon svg{width:20px;height:20px;}
+  .pay-card h3{font-size:0.95rem;font-weight:800;margin-bottom:4px;}
+  .pay-card p{font-size:0.85rem;color:var(--ink-soft);}
+  @media (max-width:900px){
+    .pay-grid{grid-template-columns:1fr;}
+  }
+  #view-envios{display:none;}
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-visual{height:260px;margin-top:10px;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .promo{grid-template-columns:1fr;}
+    .why-grid{grid-template-columns:repeat(2,1fr);}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    nav.main-nav{display:none;}
+  }
+  /* Aviso guía de tallas */
+  .size-tip{background:rgba(198,255,61,0.08);border-bottom:1px solid var(--line);}
+  .size-tip-inner{max-width:1200px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:12px;font-size:0.9rem;}
+  .size-tip-inner svg{flex:none;}
+  .size-tip-inner a{color:var(--ink);font-weight:700;white-space:nowrap;text-decoration:underline;}
+  @media (max-width:600px){.size-tip-inner{padding:12px 16px;font-size:0.82rem;align-items:flex-start;flex-wrap:wrap;}}
+  /* Cómo medirse */
+  .how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:10px;}
+  .how-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;}
+  .how-card h3{font-size:0.95rem;font-weight:800;margin-bottom:4px;color:var(--ink);border-left:3px solid var(--volt);padding-left:10px;}
+  .how-card .how-for{display:block;font-size:0.75rem;color:var(--ink-soft);font-weight:600;margin-bottom:10px;}
+  .how-card ol{margin:0;padding-left:20px;font-size:0.88rem;color:var(--ink);}
+  .how-card li{margin-bottom:5px;}
+  .how-card .how-tip{margin:10px 0 0;font-size:0.8rem;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:10px;}
+  .how-need{background:var(--bg-panel);border:1px solid var(--line);border-radius:10px;padding:16px 20px;margin-top:6px;font-size:0.9rem;}
+  @media (max-width:900px){.how-grid{grid-template-columns:1fr;}}
+  .badge-img{width:100%;height:130px;object-fit:contain;background:#fff;border-radius:6px;display:block;}
+  .glove-badge.g1{width:180px;} .glove-badge.g2{width:180px;top:190px;} .glove-badge.g3{width:170px;top:200px;}
+  .hero-visual{height:380px;}
+  @media (max-width:900px){
+    .hero-visual{height:auto;display:flex;gap:10px;}
+    .glove-badge,.glove-badge.g1,.glove-badge.g2,.glove-badge.g3{position:static;transform:none;width:auto;flex:1;min-width:0;padding:10px;}
+    .badge-img{height:90px;}
+  }
+  /* Checkout */
+  .co-modal{position:fixed;inset:0;z-index:90;display:none;align-items:flex-start;justify-content:center;background:rgba(10,11,8,0.7);overflow-y:auto;padding:24px 14px;}
+  .co-modal.open{display:flex;}
+  .co-box{background:var(--bg-panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;width:100%;max-width:880px;display:grid;grid-template-columns:1.2fr 0.8fr;overflow:hidden;}
+  .co-form{padding:26px;}
+  .co-side{padding:26px;background:var(--card);border-left:1px solid var(--line);}
+  .co-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .co-head h3{font-size:1.05rem;}
+  .co-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink-soft);}
+  .co-form label{display:block;font-size:0.78rem;font-weight:700;color:var(--ink-soft);margin:12px 0 4px;}
+  .co-form input,.co-form textarea{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:10px 12px;font:inherit;font-size:0.9rem;}
+  .co-form input:focus,.co-form textarea:focus{outline:2px solid var(--volt);outline-offset:0;}
+  .co-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .co-check{display:flex;gap:8px;align-items:flex-start;margin-top:16px;font-size:0.8rem;color:var(--ink-soft);}
+  .co-check input{width:auto;margin-top:3px;}
+  .co-check a{color:var(--ink);font-weight:700;}
+  .co-err{color:var(--danger);font-size:0.8rem;margin-top:10px;min-height:1em;}
+  .co-pay{width:100%;margin-top:12px;background:var(--volt);color:#12130F;border:none;padding:14px;border-radius:6px;font-weight:800;cursor:pointer;font-size:0.95rem;}
+  .co-pay:disabled{opacity:.6;cursor:wait;}
+  .co-line{display:flex;justify-content:space-between;gap:10px;font-size:0.84rem;padding:7px 0;border-bottom:1px solid var(--line);}
+  .co-line small{display:block;color:var(--ink-soft);}
+  .co-total{display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem;margin-top:14px;}
+  .co-box.single{grid-template-columns:1fr;max-width:560px;}
+  .co-box.single .co-side{display:none;}
+  .co-note{font-size:0.75rem;color:var(--ink-soft);margin-top:10px;}
+  .co-warn{background:rgba(233,85,60,0.1);border:1px solid var(--danger);border-radius:6px;padding:10px 12px;font-size:0.78rem;margin-top:12px;}
+  @media (max-width:760px){.co-box{grid-template-columns:1fr;}.co-side{border-left:none;border-top:1px solid var(--line);order:-1;}.co-row{grid-template-columns:1fr;}}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:8px;font-size:0.85rem;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:120;max-width:90vw;text-align:center;}
+  #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  .add-btn:disabled{opacity:.45;cursor:not-allowed;}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="logo" onclick="showTienda();">
+      <img src="img/img-efbf1d46c3.webp" alt="Logo ArcoCero" loading="lazy" decoding="async" style="width:36px;height:36px;border-radius:50%;flex:none;">
+      <span>
+        <span class="logo-word">ArcoCero</span>
+        <span class="logo-tag">EQUIPO DE ARQUEROS</span>
+      </span>
+    </a>
+    <nav class="main-nav">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#combos">Combos</a>
+      <a href="#porque">Por qué ArcoCero</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <button class="cart-btn" onclick="toggleCart(true)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12130F" stroke-width="2.2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      Carrito
+      <span class="cart-badge" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="size-tip" id="offlineBanner" role="alert" style="display:none;background:rgba(233,85,60,0.12);">
+    <div class="size-tip-inner"><span><b>Vista previa sin servidor:</b> puedes ver el catálogo y armar el carrito, pero para pagar y ver el stock real debes abrir la tienda desde el servidor: ejecuta <code>npm start</code> y entra a <b>http://localhost:3000</b>.</span></div>
+  </div>
+  <div class="size-tip" role="note">
+    <div class="size-tip-inner">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span><b>Antes de comprar:</b> te recomendamos revisar primero las guías de tallas (al final de la página) para elegir la medida correcta.</span>
+      <a href="#tallas" onclick="showTallas();return false;">Ver guía de tallas</a>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Envíos a toda Colombia</span>
+        <h1>Equipo de <span>arquero</span>, a la altura de cada atajada.</h1>
+        <p class="lede">Guantes, guayos y protecciones de las marcas que usan los profesionales — Rinat, Reusch, Uhlsport, Puma y más. Elige talla, corte de palma y terreno de juego.</p>
+        <div class="hero-ctas">
+          <a href="#catalogo" class="btn btn-primary">Ver catálogo</a>
+          <a href="#combos" class="btn btn-ghost">Combo de iniciación</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="glove-badge g1">
+          <img class="badge-img" src="img/img-9e0bf4c821.webp" alt="Guantes de portero Rinat">
+          <span>Rollfinger · Omega Grip</span>
+        </div>
+        <div class="glove-badge g2">
+          <img class="badge-img" src="img/img-9ffedabe12.webp" alt="Guayos Under Armour">
+          <span>Guayos FG</span>
+        </div>
+        <div class="glove-badge g3">
+          <img class="badge-img" src="img/img-9a0e79763c.webp" alt="Canilleras Mitre">
+          <span>Canilleras Aircell</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Catálogo</h2>
+          <p>Filtra por categoría. Guantes y guayos incluyen selector de talla.</p>
+        </div>
+      </div>
+      <div class="tabs">
+        <button class="tab active" data-filter="todos" onclick="filterProducts('todos', this)">Todos</button>
+        <button class="tab" data-filter="guantes" onclick="filterProducts('guantes', this)">Guantes</button>
+        <button class="tab" data-filter="guayos" onclick="filterProducts('guayos', this)">Guayos</button>
+        <button class="tab" data-filter="vestuario" onclick="filterProducts('vestuario', this)">Vestuario y protecciones</button>
+        <button class="tab" data-filter="entrenamiento" onclick="filterProducts('entrenamiento', this)">Entrenamiento</button>
+      </div>
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <section id="combos">
+    <div class="wrap">
+      <div class="promo">
+        <div>
+          <h2>Combo de iniciación — arquero completo</h2>
+          <p>Todo lo esencial para empezar: guante, pantalón acolchado, rodilleras y canilleras, en una sola compra.</p>
+          <ul class="promo-items">
+            <li>1 par de guantes Rinat Kancerbero (talla a elegir)</li>
+            <li>1 pantalón de portero acolchado</li>
+            <li>1 par de rodilleras + 1 par de canilleras Mitre Aircell</li>
+          </ul>
+          <div class="promo-price"><span class="now">$340.000</span><span class="was">$422.000</span></div>
+        </div>
+        <div>
+          <img id="comboImg" alt="Combo de iniciación: guantes, pantalón, rodilleras y canilleras" style="width:100%;border-radius:10px;border:1px solid var(--line);display:block;margin-bottom:16px;">
+          <button class="add-btn" style="width:100%;padding:16px;font-size:0.95rem;" onclick="addToCart('combo-inicio')">Agregar combo al carrito</button>
+        </div>
+      </div>
+
+      <div class="promo" style="margin-top:22px;">
+        <div>
+          <h2>Combo de entrenamiento completo</h2>
+          <p>Todo el material para una sesión de entrenamiento de arquero, en un solo pedido.</p>
+          <ul class="promo-items">
+            <li>Set de conos y escalera de coordinación</li>
+            <li>Rebotador de reacción para portero</li>
+            <li>Set de aros de agilidad + set de estacas</li>
+            <li>Balón medicinal (5, 10 y 15 kg) + balón de fútbol N°5</li>
+          </ul>
+          <div class="promo-price"><span class="now">$505.000</span><span class="was">$675.000</span></div>
+        </div>
+        <div>
+          <img src="img/img-62afae1f40.webp" alt="Combo de entrenamiento completo: conos, rebotador, aros, estacas y balones" loading="lazy" decoding="async" style="width:100%;border-radius:10px;border:1px solid var(--line);display:block;margin-bottom:16px;background:#fff;">
+          <button class="add-btn" style="width:100%;padding:16px;font-size:0.95rem;" onclick="addToCart('combo-entrenamiento')">Agregar combo al carrito</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="porque">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Por qué elegir ArcoCero</h2>
+          <p>El catálogo más completo para arqueros, con equipamiento de calidad profesional en cada categoría.</p>
+        </div>
+      </div>
+      <div class="why-grid">
+        <div class="why-item"><h3>Calidad profesional certificada</h3><p>Solo marcas reconocidas a nivel mundial — Rinat, Reusch, Uhlsport, Puma y Adidas — con materiales de grado competitivo en cada guante, guayo y protección.</p></div>
+        <div class="why-item"><h3>El catálogo más amplio</h3><p>Más de 10 líneas de producto entre guantes, guayos, vestuario, protecciones y entrenamiento, con múltiples tallas y referencias por cada una.</p></div>
+        <div class="why-item"><h3>Guía de tallas real</h3><p>Medimos cada modelo contra la ficha técnica del fabricante antes de publicarlo, para que la talla que eliges sea la correcta.</p></div>
+        <div class="why-item"><h3>Stock verificado por variante</h3><p>Suficiente inventario en cada talla y color — el stock que ves es el que realmente tenemos disponible, sin sorpresas.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section id="view-nosotros">
+  <div class="about-wrap" style="padding:48px 0 0;">
+    <button class="back-link" onclick="showTienda()">← Volver a la tienda</button>
+    <img src="img/img-c4fbd502d7.webp" alt="Logo ArcoCero" loading="lazy" decoding="async" style="width:120px;height:120px;border-radius:50%;display:block;margin-bottom:20px;">
+    <span class="eyebrow">Nosotros</span>
+    <h1>El catálogo pensado por y para <span style="color:var(--volt);">arqueros</span>.</h1>
+    <p class="lede">ArcoCero nació para resolver un problema simple: encontrar equipamiento de portero de calidad, con la talla correcta y en un solo lugar, sin tener que recorrer media ciudad o varias tiendas genéricas de fútbol.</p>
+    <div class="stat-row">
+      <div class="stat"><b>5+</b><span>categorías de equipamiento</span></div>
+      <div class="stat"><b>12+</b><span>referencias en catálogo</span></div>
+      <div class="stat"><b>6</b><span>marcas especializadas</span></div>
+    </div>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Resumen de la tienda</h2>
+    <p>ArcoCero es una tienda en línea especializada exclusivamente en equipamiento para porteros de fútbol: guantes de distintos cortes y tipos de palma, guayos para diferentes terrenos de juego, vestuario con protección (pantalones, licras, coderas, rodilleras y canilleras) y material de entrenamiento para trabajar reflejos y coordinación.</p>
+    <p>A diferencia de una tienda deportiva genérica, cada producto incluye las especificaciones que realmente le importan a un arquero — corte del guante, tipo de agarre de la palma, terreno recomendado para el guayo, zonas de acolchado — además de tallas con inventario verificado variante por variante.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>¿Por qué creamos esta página?</h2>
+    <p>Este proyecto nació como un ejercicio práctico de comercio electrónico dentro de mi formación en Ingeniería de Software: diseñar, desde cero, una tienda en línea completa — catálogo, carrito de compras, variantes de producto y experiencia de usuario — aplicando lo aprendido más allá de la teoría.</p>
+    <p>Elegimos un nicho específico, el equipamiento de porteros, porque es un segmento desatendido frente al fútbol en general: la mayoría de tiendas deportivas tratan a los arqueros como una categoría secundaria, con poca variedad de tallas y sin las especificaciones técnicas que un guardameta necesita para elegir bien. ArcoCero busca cerrar esa brecha.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Sobre mí</h2>
+    <div class="profile-card">
+      <div class="avatar">
+        <img id="avatarImg" alt="Carlos Francisco Delgado Yepes">
+      </div>
+      <div class="profile-info">
+        <h3>Carlos Francisco Delgado Yepes</h3>
+        <div class="role">Estudiante de Ingeniería de Software · Primer semestre</div>
+        <div class="profile-meta">
+          <div><b>Edad</b><span>17 años</span></div>
+          <div><b>Teléfono</b><a href="tel:+573173413955">317 341 3955</a></div>
+          <div><b>Correo institucional</b><a href="mailto:carlos.delgadoy@campusucc.edu.co">carlos.delgadoy@campusucc.edu.co</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="view-tallas">
+  <div class="about-wrap" style="padding:48px 0 0;">
+    <button class="back-link" onclick="showTienda()">← Volver a la tienda</button>
+    <span class="eyebrow">Guía de tallas</span>
+    <h1>Encuentra tu talla exacta antes de comprar.</h1>
+    <p class="lede">Compara la medida de tu pie o de tu mano contra las tablas oficiales de cada marca. Mientras más cerca estés de la medida en centímetros, mejor va a calzar el guante o el guayo.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Por qué un equipo bien ajustado hace la diferencia</h2>
+    <p>Un guante holgado pierde agarre en el momento exacto de una atajada — la palma se desplaza dentro del guante y el toque de balón deja de ser preciso. Uno demasiado ajustado, en cambio, restringe la flexión de los dedos y cansa la mano antes de tiempo. Lo mismo pasa con los guayos: un número de más genera rozaduras y pérdida de estabilidad en los cambios de dirección; un número de menos comprime el pie y puede generar lesiones a largo plazo.</p>
+    <p>Por eso en ArcoCero insistimos en comparar la medida real de tu mano o tu pie en centímetros contra la tabla del fabricante, en lugar de guiarte solo por el número que usas en otra marca — las tallas no siempre son equivalentes entre Adidas, Puma o Rinat.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Tablas de tallas por marca</h2>
+    <div class="size-grid">
+      <div class="size-card">
+        <img src="img/img-1709de864e.webp" alt="Guía de tallas de guayos Adidas, hombre y mujer, en US, EUR y centímetros" loading="lazy" decoding="async">
+        <div class="size-label">Guayos Adidas — Hombre / Mujer</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-5be5eb9535.webp" alt="Guía de tallas de guayos Puma, hombre y mujer, en US, Colombia y centímetros" loading="lazy" decoding="async">
+        <div class="size-label">Guayos Puma — Hombre / Mujer</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-ff3457cfc2.webp" alt="Guía de tallas de guantes Rinat según medida del dedo medio" loading="lazy" decoding="async">
+        <div class="size-label">Guantes Rinat — Niño / Adulto</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-ee7f262aca.webp" alt="Guía de tallas de pantalones de hombre: XS a 3XL, cintura, cadera y largo entrepierna" loading="lazy" decoding="async">
+        <div class="size-label">Pantalones — Hombre</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-10b739fa63.webp" alt="Guía de tallas de pantalones y licra de mujer: XXS a XXL, cintura, cadera y largo entrepierna" loading="lazy" decoding="async">
+        <div class="size-label">Pantalones y licra — Mujer</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-3af3c16cbe.webp" alt="Guía de tallas de coderas: XS a XL según longitud del antebrazo" loading="lazy" decoding="async">
+        <div class="size-label">Coderas</div>
+      </div>
+      <div class="size-card">
+        <img src="img/img-27c6552524.webp" alt="Guía de tallas de rodilleras: S a XXL según contorno de rodilla" loading="lazy" decoding="async">
+        <div class="size-label">Rodilleras</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-wrap about-block">
+    <h2>Cómo tomar cada medida</h2>
+    <p>Necesitas una cinta métrica flexible (de costura) o, en su defecto, una regla y un hilo. Mídete sin ropa gruesa, sin apretar la cinta, y compara el resultado en centímetros con la tabla de cada producto.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <h3>Longitud del pie (CM)</h3>
+        <span class="how-for">Guayos Adidas y Puma — columna "CM" / "Longitud"</span>
+        <ol><li>Pégate una hoja de papel contra una pared, con el talón apoyado en la pared y de pie sobre la hoja.</li><li>Marca con un lápiz el punto de la punta del dedo más largo (puede ser el dedo gordo o el segundo).</li><li>Mide con una regla o cinta la distancia desde el borde de la pared hasta la marca.</li><li>Repite con el otro pie y quédate con la medida más grande.</li></ol>
+        <p class="how-tip">Hazlo al final del día, cuando el pie está más hinchado, y con las medias que usarías para jugar. Si quedas entre dos tallas, elige la mayor.</p>
+      </div>
+      <div class="how-card">
+        <h3>Talla US, EUR y Colombia</h3>
+        <span class="how-for">Guayos — columnas "US", "EUR" y "Colombia"</span>
+        <ol><li>No se miden: son solo formas distintas de nombrar la misma talla.</li><li>Mide primero la longitud de tu pie en cm (tarjeta anterior).</li><li>Busca esa medida en la columna "CM" o "Longitud" de la tabla y lee en la misma fila tu talla US, EUR o Colombia.</li></ol>
+        <p class="how-tip">Usa la tabla de cada marca: Adidas y Puma no siempre coinciden, así que no te guíes por el número de otra marca.</p>
+      </div>
+      <div class="how-card">
+        <h3>Largo del dedo medio</h3>
+        <span class="how-for">Guantes Rinat — columna "Dedo medio"</span>
+        <ol><li>Apoya la mano abierta y estirada sobre una mesa, con los dedos juntos.</li><li>Ubica el pliegue de la muñeca, donde termina la palma y empieza el antebrazo.</li><li>Mide en línea recta desde ese pliegue hasta la punta del dedo medio, como muestra la línea punteada de la guía.</li><li>Compara el resultado con el rango en cm de la tabla.</li></ol>
+        <p class="how-tip">Mide la mano con la que más usas el guante o la más grande. Si caes entre dos rangos, elige la talla mayor para que no apriete los dedos.</p>
+      </div>
+      <div class="how-card">
+        <h3>Cintura</h3>
+        <span class="how-for">Pantalones hombre y mujer — columna "Cintura"</span>
+        <ol><li>Ponte de pie, relajado y sin meter el abdomen.</li><li>Pasa la cinta métrica por la parte más angosta del torso, normalmente a la altura del ombligo.</li><li>Mantén la cinta paralela al piso, ajustada pero sin apretar, y lee la medida en cm.</li></ol>
+        <p class="how-tip">Mídete sobre ropa ligera o directamente sobre la piel para no sumar centímetros de más.</p>
+      </div>
+      <div class="how-card">
+        <h3>Cadera</h3>
+        <span class="how-for">Pantalones hombre y mujer — columna "Cadera"</span>
+        <ol><li>Párate con los pies juntos.</li><li>Rodea con la cinta la parte más ancha de la cadera y los glúteos.</li><li>Verifica que la cinta quede paralela al piso en todo el contorno y anota la medida en cm.</li></ol>
+        <p class="how-tip">Si tu cintura y tu cadera caen en tallas distintas, elige la talla de la cadera para que el pantalón no te apriete al agacharte.</p>
+      </div>
+      <div class="how-card">
+        <h3>Largo de entrepierna</h3>
+        <span class="how-for">Pantalones hombre y mujer — columna "Largo entrepierna"</span>
+        <ol><li>Ponte de pie con los pies ligeramente separados.</li><li>Mide por la parte interna de la pierna, desde la ingle hasta el tobillo (el hueso que sobresale).</li><li>Anota la medida en cm. Es más fácil si alguien te ayuda o si la tomas sobre un pantalón que ya te quede bien.</li></ol>
+        <p class="how-tip">Si usas un pantalón que ya te queda bien, extiéndelo en una mesa y mide la costura interna desde la entrepierna hasta el borde inferior.</p>
+      </div>
+      <div class="how-card">
+        <h3>Contorno de rodilla</h3>
+        <span class="how-for">Rodilleras — columna "Contorno de rodilla"</span>
+        <ol><li>Siéntate con la pierna relajada y la rodilla doblada a unos 90°.</li><li>Rodea con la cinta el centro de la rótula (la parte media de la rodilla).</li><li>Ajusta la cinta sin apretar y anota la medida en cm.</li></ol>
+        <p class="how-tip">Mide ambas rodillas y toma la mayor. Si caes justo entre dos tallas, elige la mayor para tener más comodidad al moverte.</p>
+      </div>
+      <div class="how-card">
+        <h3>Contorno del codo</h3>
+        <span class="how-for">Coderas — tallas XS a XL en cm</span>
+        <ol><li>Estira el brazo con el codo relajado, ligeramente flexionado.</li><li>Rodea con la cinta el centro de la articulación del codo.</li><li>Ajusta la cinta sin apretar y compara los cm con el rango de cada talla de la tabla.</li></ol>
+        <p class="how-tip">Mídete con el brazo relajado, sin tensar el músculo. Si tienes dudas entre dos tallas, elige la mayor.</p>
+      </div>
+    </div>
+    <div class="how-need"><b>Recuerda:</b> si tu medida cae entre dos tallas, elige la mayor. Y si dudas, escríbenos antes de comprar y te ayudamos a escoger.</div>
+  </div>
+
+</section>
+
+<section id="view-pagos">
+  <div class="about-wrap" style="padding:48px 0 0;">
+    <button class="back-link" onclick="showTienda()">← Volver a la tienda</button>
+    <span class="eyebrow">Medios de pago</span>
+    <h1>Paga como prefieras, con la misma seguridad.</h1>
+    <p class="lede">ArcoCero acepta los principales medios de pago del mercado colombiano, para que elijas el que mejor se ajuste a tu presupuesto y forma de comprar.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Opciones disponibles</h2>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+        <div>
+          <h3>Tarjeta de crédito</h3>
+          <p>Visa, Mastercard y American Express. Pago inmediato y la opción de diferir a cuotas directamente con tu banco emisor, sujeto a las condiciones de tu tarjeta.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <div>
+          <h3>Tarjeta débito</h3>
+          <p>Visa Débito y Mastercard Débito. El valor se descuenta directamente de tu cuenta bancaria al confirmar el pedido.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12v9"/><path d="M3 7l9 5 9-5"/></svg></div>
+        <div>
+          <h3>PSE</h3>
+          <p>Pago seguro en línea con débito directo desde tu cuenta de ahorros o corriente, con la mayoría de bancos colombianos disponibles.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg></div>
+        <div>
+          <h3>Pago a plazos (cuotas)</h3>
+          <p>Financiación con plataformas como Addi o Sistecrédito, que aprueban el cupo en línea y permiten pagar tu pedido en varias cuotas sin necesidad de tarjeta de crédito.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg></div>
+        <div>
+          <h3>Nequi y Daviplata</h3>
+          <p>Pago directo desde la app de tu billetera digital, sin necesidad de ingresar datos de tarjeta.</p>
+        </div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div>
+          <h3>Pago contra entrega</h3>
+          <p>Disponible para pedidos dentro de la ciudad: pagas en efectivo o con datáfono cuando recibes tu equipo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Seguridad en el pago</h2>
+    <p>Todas las transacciones con tarjeta y PSE se procesan a través de una pasarela de pagos certificada, que cifra tus datos de principio a fin — ArcoCero nunca almacena el número completo de tu tarjeta.</p>
+  </div>
+</section>
+
+<section id="view-envios">
+  <div class="about-wrap" style="padding:48px 0 0;">
+    <button class="back-link" onclick="showTienda()">← Volver a la tienda</button>
+    <span class="eyebrow">Envíos y cambios</span>
+    <h1>Lo que necesitamos para despachar o cambiar tu pedido.</h1>
+    <p class="lede">Para que tu equipo llegue sin contratiempos, o para resolver un cambio lo más rápido posible, necesitamos esta información completa desde el primer mensaje.</p>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Datos para el envío</h2>
+    <p>Al confirmar tu pedido, necesitamos los datos del destinatario para poder despachar correctamente:</p>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"/></svg></div>
+        <div><h3>Nombre completo</h3><p>De quien recibe el pedido.</p></div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <div><h3>Dirección completa</h3><p>Calle, carrera, número y barrio o referencia.</p></div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M12 3v4M8 7h8"/></svg></div>
+        <div><h3>Ciudad</h3><p>Para calcular la transportadora y el tiempo de entrega.</p></div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg></div>
+        <div><h3>Teléfono de contacto</h3><p>Para que la transportadora coordine la entrega.</p></div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>
+        <div><h3>Artículo a despachar</h3><p>Producto, talla y cantidad exactos del pedido confirmado.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Si necesitas un cambio</h2>
+    <p>Para tramitar un cambio lo más rápido posible, necesitamos que nos cuentes el motivo — por ejemplo, fallo en el tallaje, el producto llegó averiado, o hubo una confusión de producto — junto con evidencia fotográfica del artículo y, si aplica, del empaque. Con esa información confirmamos el cambio sin más preguntas ni vueltas.</p>
+    <div class="how-need" style="margin-top:14px;"><b>Plazo para solicitar el cambio: 5 días calendario</b> contados desde el día en que recibes el pedido. Pasado ese plazo no se pueden tramitar cambios. El artículo debe estar sin uso, con sus etiquetas y en su empaque original.</div>
+  </div>
+
+  <div class="about-wrap about-block">
+    <h2>Cuándo no se hace cambio</h2>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><path d="M12 3c3 4 5 6.5 5 10a5 5 0 0 1-10 0c0-3.5 2-6 5-10z"/></svg></div>
+        <div><h3>Desgaste rápido del látex</h3><p>No se hacen cambios ni devoluciones por desgaste prematuro del látex de la palma del guante. Esto aplica a guantes que ya fueron usados.</p></div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#C6FF3D" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg></div>
+        <div><h3>Artículos usados</h3><p>Productos que ya fueron usados en entrenamiento o partido, lavados o sin etiquetas y empaque originales.</p></div>
+      </div>
+    </div>
+    <h3 style="margin-top:28px;">¿Por qué el látex se desgasta rápido?</h3>
+    <p>La palma del guante de arquero está hecha de látex de alto agarre: un material blando y pegajoso, diseñado justamente para sujetar el balón. Esa misma suavidad hace que sea un material de consumo, no una falla de fabricación. Su duración depende casi por completo de cómo se use:</p>
+    <p>• <b>La superficie donde se juega.</b> En canchas sintéticas o de cemento, que son abrasivas, el látex se lija con cada atajada y puede perder agarre en pocas sesiones. En césped natural dura bastante más.<br>
+    • <b>La humedad y el cuidado.</b> Guardar el guante mojado, secarlo al sol o con calor directo, o no humedecerlo antes de jugar acelera que el látex se endurezca, se agriete o se desprenda.<br>
+    • <b>La frecuencia y el estilo de juego.</b> Entrenar a diario, arrastrar la palma por el piso o golpear el balón con fuerza lo desgastan más rápido que un uso ocasional.<br>
+    • <b>La limpieza.</b> La tierra, el polvo y el sudor acumulados reducen el agarre y degradan el material si el guante no se lava con agua fría y jabón suave.</p>
+    <p>Como este desgaste ocurre con el uso normal y no depende del producto en el momento de la entrega, no es posible cubrirlo con un cambio. Si el guante llegó con un defecto de fábrica visible (costuras abiertas, látex despegado o manchado antes de usar), sí lo cambiamos dentro del plazo de 5 días: solo envíanos las fotos.</p>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>ArcoCero</h4>
+        <p style="color:#817E6E;font-size:0.86rem;max-width:32ch;">Equipamiento especializado para porteros de fútbol. Envíos a nivel nacional.</p>
+      </div>
+      <div>
+        <h4>Tienda</h4>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#combos">Combos</a>
+        <a href="#nosotros" onclick="showNosotros();return false;">Nosotros</a>
+      </div>
+      <div>
+        <h4>Ayuda</h4>
+        <a href="#tallas" onclick="showTallas();return false;">Guía de tallas</a>
+        <a href="#envios" onclick="showEnvios();return false;">Envíos y cambios</a>
+        <a href="#pagos" onclick="showPagos();return false;">Medios de pago</a>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 ArcoCero</span>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
+<div class="co-modal" id="coModal" role="dialog" aria-modal="true" aria-labelledby="coTitle">
+  <div class="co-box">
+    <div class="co-form" id="coDone" style="display:none;"></div>
+    <form class="co-form" id="coForm" onsubmit="return submitCheckout(event)" novalidate>
+      <div class="co-head"><h3 id="coTitle">Datos de envío y pago</h3><button type="button" class="co-close" onclick="closeCheckout()" aria-label="Cerrar">×</button></div>
+      <label for="coName">Nombre completo</label><input id="coName" autocomplete="name" required>
+      <div class="co-row">
+        <div><label for="coEmail">Correo electrónico</label><input id="coEmail" type="email" autocomplete="email" required></div>
+        <div><label for="coPhone">Teléfono (celular)</label><input id="coPhone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="3001234567" required></div>
+      </div>
+      <div class="co-row">
+        <div><label for="coCity">Ciudad</label><input id="coCity" autocomplete="address-level2" required></div>
+        <div><label for="coRegion">Departamento</label><input id="coRegion" autocomplete="address-level1" required></div>
+      </div>
+      <label for="coAddr">Dirección completa</label><input id="coAddr" autocomplete="street-address" placeholder="Calle, carrera, número y barrio" required>
+      <label for="coNotes">Notas del pedido (opcional)</label><textarea id="coNotes" rows="2" placeholder="Referencia de entrega, detalle de talla, etc."></textarea>
+      <label class="co-check"><input type="checkbox" id="coTerms"><span>He revisado las <a href="#tallas" onclick="closeCheckout();showTallas();return false;">guías de tallas</a> y acepto las condiciones de <a href="#envios" onclick="closeCheckout();showEnvios();return false;">envíos y cambios</a> (plazo de 5 días; sin cambio por desgaste del látex).</span></label>
+      <div class="co-err" id="coErr" role="alert"></div>
+      <button class="co-pay" id="coPay" type="submit">Pagar de forma segura</button>
+      <p class="co-note">Al pagar reservamos tus unidades por unos minutos y se abre la pasarela Wompi (tarjeta, PSE o Nequi). ArcoCero no guarda datos de tu tarjeta.</p>
+    </form>
+    <aside class="co-side">
+      <h3 style="font-size:0.95rem;margin-bottom:10px;">Tu pedido</h3>
+      <div id="coItems"></div>
+      <div class="co-total"><span>Total</span><span id="coTotal"></span></div>
+      <p class="co-note">El costo de envío se acuerda por la transportadora según tu ciudad.</p>
+      <div class="co-warn" id="coCfgWarn" style="display:none;"></div>
+    </aside>
+  </div>
+</div>
+
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="drawer-close" onclick="toggleCart(false)">✕</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <div class="drawer-foot">
+    <div class="drawer-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="checkout-btn" onclick="openCheckout()">Finalizar compra</button>
+  </div>
+</aside>
+
+<script>
+  // Fotografías de producto proporcionadas por el usuario, comprimidas a JPEG
+  // y embebidas en base64 para que el archivo funcione como un solo .html
+  // autocontenido sin depender de conexión a internet.
+  const productImages = {
+    "combo-inicio": "img/img-8f0466e2ff.webp",
+    "guante-rinat": "img/img-9325aa6b59.webp",
+    "guante-reusch": "img/img-abd50a18cb.webp",
+    "guante-uhlsport": "img/img-f3ea1dabbb.webp",
+    "guayos-puma": "img/img-9b04ce3305.webp",
+    "guayos-adidas": "img/img-2bcf5d607a.webp",
+    "pantalon": "img/img-3c6a71d8e0.webp",
+    "licra": "img/img-da25367569.webp",
+    "codos": "img/img-a5e23faa78.webp",
+    "rodilleras": "img/img-1de8caedfd.webp",
+    "canilleras": "img/img-4b8d563c99.webp",
+    "conos": "img/img-cb80a91122.webp",
+    "rebotador": "img/img-233769f880.webp",
+    "estacas": "img/img-17df48b891.webp",
+    "aros": "img/img-4711b8548a.webp",
+    "balones": "img/img-58172cf81a.webp",
+    "combo-entrenamiento": "img/img-62afae1f40.webp"
+  };
+
+  (function(){
+    const map = {"guante-rinat-spider":".glove-badge.g1 img","guayos-ua":".glove-badge.g2 img","canilleras-mitre-negra":".glove-badge.g3 img"};
+    for(const id in map){ const el = document.querySelector(map[id]); if(el) productImages[id] = el.src; }
+  })();
+
+  // Fotos por variante (peso) para productos con selector.
+  const variantImages = {
+   "balones-medicinales": {
+    "5kg": "img/img-9289a4985a.webp",
+    "10kg": "img/img-9351cf29b3.webp",
+    "15kg": "img/img-4df3f57b9e.webp"
+   }
+  };
+  function imgFor(p, size){
+    return (variantImages[p.id] && variantImages[p.id][size]) || productImages[p.id] || null;
+  }
+
+  // Nota: nombres y precios son datos de ejemplo para el prototipo,
+  // tal como recomienda la guía de base de datos — se reemplazan por el
+  // catálogo real de proveedores antes de producción. El stock mostrado
+  // también es ilustrativo.
+  let products = [];   // se carga desde /api/products (precios y stock reales vienen del servidor)
+
+  let cart = {};
+
+  function money(n){ return "$" + n.toLocaleString("es-CO"); }
+
+  function renderProducts(filter){
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
+    products.filter(p => p.cat !== "combo" && (filter === "todos" || p.cat === filter)).forEach(p => {
+      const card = document.createElement("div");
+      card.className = "card";
+      const sizeOptions = p.sizes ? p.sizes.map(s => `<option value="${s}">${s}</option>`).join("") : "";
+      const firstSize = p.sizes ? p.sizes[0] : "Única";
+      const stock = p.stock[firstSize] || 0;
+      const firstImg = imgFor(p, firstSize);
+      const art = firstImg
+        ? `<img id="img-${p.id}" src="${firstImg}" alt="${p.name}" loading="lazy">`
+        : `<svg viewBox="0 0 60 60">${p.icon}</svg>`;
+      const firstPrice = p.prices ? p.prices[firstSize] : p.price;
+      card.innerHTML = `
+        <div class="card-art"><span class="card-brand">${p.brand}</span>${art}</div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="card-desc">${p.desc}</p>
+          ${p.sizes ? `<div class="card-variant">${p.prices ? "Peso" : "Talla"} <select id="sel-${p.id}" onchange="updateVariant('${p.id}', this)">${sizeOptions}</select></div>` : ""}
+          <span class="stock-tag ${stock <= 3 ? 'low' : ''}" id="stock-${p.id}">${stock > 0 ? stock + ' en stock' : 'Agotado'}</span>
+          <div class="card-foot">
+            <span class="price" id="price-${p.id}">${money(firstPrice)}</span>
+            <button class="add-btn" id="add-${p.id}" onclick="addToCart('${p.id}')" ${stock > 0 ? '' : 'disabled'}>${stock > 0 ? 'Agregar' : 'Agotado'}</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+
+  function updateVariant(id, selectEl){
+    const p = products.find(pr => pr.id === id);
+    const size = selectEl.value;
+    const stock = p.stock[size] || 0;
+    const tag = document.getElementById("stock-" + id);
+    tag.textContent = stock > 0 ? stock + " en stock" : "Agotado";
+    tag.className = "stock-tag" + (stock <= 3 ? " low" : "");
+    const addBtn = document.getElementById("add-" + id);
+    if(addBtn){ addBtn.disabled = stock <= 0; addBtn.textContent = stock > 0 ? "Agregar" : "Agotado"; }
+    const imgEl = document.getElementById("img-" + id);
+    const newImg = imgFor(p, size);
+    if(imgEl && newImg) imgEl.src = newImg;
+    if(p.prices){
+      document.getElementById("price-" + id).innerHTML = `${money(p.prices[size])}`;
+    }
+  }
+
+  let offlineMode = false;
+  let currentFilter = "todos";
+  function filterProducts(cat, btn){
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    btn.classList.add("active");
+    currentFilter = cat;
+    renderProducts(cat);
+  }
+
+  function showToast(msg){
+    let t = document.getElementById("toast");
+    if(!t){ t = document.createElement("div"); t.id = "toast"; t.setAttribute("role","status"); document.body.appendChild(t); }
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(showToast._t); showToast._t = setTimeout(() => t.classList.remove("show"), 3500);
+  }
+
+  // Trae catálogo y stock REAL del servidor. Ajusta el carrito si el stock bajó.
+  async function loadProducts(){
+    try{
+      const r = await fetch("/api/products", {cache:"no-store"});
+      if(!r.ok) throw new Error("products");
+      products = await r.json();
+      offlineMode = false;
+    }catch(e){
+      if(!window.CATALOG_FALLBACK) throw e;
+      products = JSON.parse(JSON.stringify(window.CATALOG_FALLBACK));   // sin servidor: catálogo de solo lectura
+      offlineMode = true;
+    }
+    const ob = document.getElementById("offlineBanner"); if(ob) ob.style.display = offlineMode ? "" : "none";
+    let adjusted = false;
+    for(const key of Object.keys(cart)){
+      const e = cart[key], p = products.find(pr => pr.id === e.id);
+      const av = p ? (p.stock[e.size] || 0) : 0;
+      if(av <= 0){ delete cart[key]; adjusted = true; }
+      else if(e.qty > av){ e.qty = av; adjusted = true; }
+    }
+    if(adjusted) showToast("Actualizamos tu carrito según el stock disponible.");
+  }
+  async function refreshStock(){
+    try{ await loadProducts(); renderProducts(currentFilter); renderCart(); }catch(e){}
+  }
+
+  function addToCart(id){
+    const p = products.find(pr => pr.id === id);
+    const selEl = document.getElementById("sel-" + id);
+    const chosenSize = selEl ? selEl.value : (p.sizes ? p.sizes[0] : "Única");
+    const key = id + "::" + chosenSize;
+    const avail = p.stock[chosenSize] || 0;
+    if((cart[key] ? cart[key].qty : 0) + 1 > avail){ showToast(avail > 0 ? "Solo hay " + avail + " disponible(s) de este producto." : "Producto agotado."); return; }
+    if(!cart[key]) cart[key] = {id, size: chosenSize, qty: 0};
+    cart[key].qty += 1;
+    renderCart();
+    toggleCart(true);
+  }
+
+  function changeQty(key, delta){
+    if(!cart[key]) return;
+    if(delta > 0){
+      const pp = products.find(pr => pr.id === cart[key].id);
+      const avail = pp ? (pp.stock[cart[key].size] || 0) : 0;
+      if(cart[key].qty + delta > avail){ showToast("No hay más unidades disponibles."); return; }
+    }
+    cart[key].qty += delta;
+    if(cart[key].qty <= 0) delete cart[key];
+    renderCart();
+  }
+
+  function renderCart(){
+    const itemsEl = document.getElementById("drawerItems");
+    const keys = Object.keys(cart);
+    let total = 0, count = 0;
+    if(keys.length === 0){
+      itemsEl.innerHTML = `<div class="drawer-empty">Tu carrito está vacío.<br>Agrega equipo del catálogo.</div>`;
+    } else {
+      itemsEl.innerHTML = keys.map(key => {
+        const entry = cart[key];
+        const p = products.find(pr => pr.id === entry.id);
+        const unitPrice = p.prices ? p.prices[entry.size] : p.price;
+        total += unitPrice * entry.qty;
+        count += entry.qty;
+        const diImg = imgFor(p, entry.size);
+        const diArt = diImg
+          ? `<img src="${diImg}" alt="${p.name}">`
+          : `<svg viewBox="0 0 60 60">${p.icon}</svg>`;
+        return `<div class="drawer-item">
+          <div class="di-art">${diArt}</div>
+          <div class="di-info">
+            <b>${p.name}</b>
+            <small>${entry.size !== "Única" ? entry.size : ""}</small>
+            <div class="di-qty">
+              <button class="qty-btn" onclick="changeQty('${key}',-1)">–</button>
+              <span>${entry.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${key}',1)">+</button>
+            </div>
+          </div>
+          <span class="di-price">${money(unitPrice*entry.qty)}</span>
+        </div>`;
+      }).join("");
+    }
+    document.getElementById("cartTotal").textContent = money(total);
+    document.getElementById("cartCount").textContent = count;
+  }
+
+  function toggleCart(open){
+    document.getElementById("drawer").classList.toggle("open", open);
+    document.getElementById("overlay").classList.toggle("open", open);
+  }
+
+  const comboImgEl = document.getElementById("comboImg");
+  if(comboImgEl && productImages["combo-inicio"]) comboImgEl.src = productImages["combo-inicio"];
+
+  function hideAllViews(){
+    document.getElementById("top").style.display = "none";
+    document.getElementById("view-nosotros").style.display = "none";
+    document.getElementById("view-tallas").style.display = "none";
+    document.getElementById("view-pagos").style.display = "none";
+    document.getElementById("view-envios").style.display = "none";
+  }
+  function showNosotros(){
+    hideAllViews();
+    document.getElementById("view-nosotros").style.display = "block";
+    window.scrollTo(0,0);
+  }
+  function showTallas(){
+    hideAllViews();
+    document.getElementById("view-tallas").style.display = "block";
+    window.scrollTo(0,0);
+  }
+  function showPagos(){
+    hideAllViews();
+    document.getElementById("view-pagos").style.display = "block";
+    window.scrollTo(0,0);
+  }
+  function showEnvios(){
+    hideAllViews();
+    document.getElementById("view-envios").style.display = "block";
+    window.scrollTo(0,0);
+  }
+  function showTienda(){
+    hideAllViews();
+    document.getElementById("top").style.display = "";
+    window.scrollTo(0,0);
+  }
+
+  renderCart();
+  (async function init(){
+    try{ await loadProducts(); }
+    catch(e){ document.getElementById("productGrid").innerHTML = '<p style="color:var(--ink-soft)">No pudimos cargar el catálogo. Recarga la página en unos segundos.</p>'; return; }
+    renderProducts("todos"); renderCart();
+    handleReturnFromPayment();
+  })();
+  document.addEventListener("visibilitychange", () => { if(!document.hidden && !document.getElementById("coModal").classList.contains("open")) refreshStock(); });
+
+  const avatarImgEl = document.getElementById("avatarImg");
+  if(avatarImgEl) avatarImgEl.src = "img/img-18ce57cbf2.webp";
+
+  // ===================== PAGO (servidor + Wompi) =====================
+  // El navegador NUNCA decide precios ni stock: envía {id, talla, cantidad} y el servidor
+  // valida, reserva las unidades, calcula el total y firma el pago. Wompi cobra y avisa al servidor (webhook).
+  let serverCfg = { mock: true };
+  let activeOrder = null;
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  function esc(t){ return String(t).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+  function cartLines(){
+    return Object.keys(cart).map(key => {
+      const e = cart[key], p = products.find(pr => pr.id === e.id);
+      const unit = p.prices ? p.prices[e.size] : p.price;
+      return {id:e.id, name:p.name, size:e.size, qty:e.qty, unit, sub:unit*e.qty};
+    });
+  }
+  function cartTotal(){ return cartLines().reduce((a,l)=>a+l.sub,0); }
+
+  function paintCheckoutSummary(){
+    const lines = cartLines();
+    document.getElementById("coItems").innerHTML = lines.map(l =>
+      `<div class="co-line"><span>${esc(l.name)}<small>${l.size!=="Única"?esc(l.size)+" · ":""}x${l.qty}</small></span><b>${money(l.sub)}</b></div>`).join("");
+    document.getElementById("coTotal").textContent = money(cartTotal());
+  }
+
+  async function openCheckout(){
+    if(offlineMode){ showToast("Para pagar necesitas abrir la tienda desde el servidor (npm start)."); toggleCart(false); window.scrollTo({top:0,behavior:"smooth"}); return; }
+    if(!Object.keys(cart).length){ showToast("Tu carrito está vacío. Agrega productos primero."); return; }
+    try{ serverCfg = await (await fetch("/api/config")).json(); }catch(e){}
+    await refreshStock();                                  // stock fresco antes de pagar
+    if(!Object.keys(cart).length) return;
+    paintCheckoutSummary();
+    const warn = document.getElementById("coCfgWarn");
+    if(serverCfg.mock){
+      warn.style.display = "block";
+      warn.innerHTML = "<b>Modo simulado:</b> el servidor no tiene llaves de Wompi. Podrás probar el flujo completo sin cobro real.";
+    } else warn.style.display = "none";
+    document.getElementById("coErr").textContent = "";
+    document.querySelector(".co-box").classList.remove("single");
+    document.getElementById("coForm").style.display = "";
+    document.getElementById("coDone").style.display = "none";
+    const pb = document.getElementById("coPay"); pb.disabled = false; pb.textContent = "Pagar de forma segura";
+    toggleCart(false);
+    document.getElementById("coModal").classList.add("open");
+    document.getElementById("coName").focus();
+  }
+  function closeCheckout(){
+    document.getElementById("coModal").classList.remove("open");
+    if(activeOrder && activeOrder.cancelable){ cancelActiveOrder(); }
+  }
+  document.addEventListener("keydown", e => { if(e.key === "Escape") closeCheckout(); });
+
+  function showDone(title, html){
+    document.getElementById("coForm").style.display = "none";
+    document.querySelector(".co-box").classList.add("single");
+    const d = document.getElementById("coDone"); d.style.display = "block";
+    d.innerHTML = `<div class="co-head"><h3>${title}</h3><button type="button" class="co-close" onclick="closeCheckout()" aria-label="Cerrar">×</button></div>${html}`;
+    document.getElementById("coModal").classList.add("open");
+  }
+  function backToForm(){
+    document.querySelector(".co-box").classList.remove("single");
+    document.getElementById("coDone").style.display = "none";
+    document.getElementById("coForm").style.display = "";
+    const pb = document.getElementById("coPay"); pb.disabled = false; pb.textContent = "Pagar de forma segura";
+    paintCheckoutSummary();
+  }
+
+  async function cancelActiveOrder(){
+    const o = activeOrder; activeOrder = null;
+    if(!o) return;
+    try{ await fetch(`/api/orders/${o.reference}/cancel`, {method:"POST"}); }catch(e){}
+    refreshStock();
+  }
+
+  async function pollOrder(reference, txId, tries){
+    for(let i = 0; i < tries; i++){
+      try{
+        const r = await fetch(`/api/orders/${encodeURIComponent(reference)}${txId ? "?id=" + encodeURIComponent(txId) : ""}`, {cache:"no-store"});
+        if(r.ok){ const j = await r.json(); if(j.status !== "PENDING") return j; }
+      }catch(e){}
+      await sleep(3000);
+    }
+    return {status:"PENDING"};
+  }
+
+  async function finishOrder(reference, txId){
+    showDone("Confirmando tu pago…", `<p>Estamos verificando el pago con la pasarela. No cierres esta ventana.</p><p class="co-note">Referencia: <b>${esc(reference)}</b></p>`);
+    const res = await pollOrder(reference, txId, 20);
+    activeOrder = null;
+    if(res.status === "PAID" || res.status === "PAID_REVIEW"){
+      cart = {}; renderCart(); refreshStock();
+      showDone("¡Pago aprobado!", `<p>Gracias por tu compra. Recibimos tu pedido <b>${esc(reference)}</b> por <b>${money(res.total || 0)}</b>.</p>
+        <p class="co-note">Te contactaremos al correo y al celular que registraste para coordinar el despacho. Guarda tu referencia por si necesitas un cambio (plazo de 5 días).</p>
+        <button class="co-pay" onclick="closeCheckout()">Seguir comprando</button>`);
+    } else if(res.status === "FAILED" || res.status === "EXPIRED"){
+      refreshStock();
+      showDone("El pago no se completó", `<p>La pasarela no aprobó el pago (referencia <b>${esc(reference)}</b>). No se hizo ningún cobro.</p>
+        <button class="co-pay" onclick="backToForm()">Intentar de nuevo</button>`);
+    } else {
+      showDone("Pago en verificación", `<p>Tu pago aún figura como pendiente en la pasarela (por ejemplo, PSE puede tardar unos minutos). Referencia: <b>${esc(reference)}</b>.</p>
+        <p class="co-note">Te confirmaremos por correo cuando se apruebe. No necesitas volver a pagar.</p>
+        <button class="co-pay" onclick="closeCheckout()">Entendido</button>`);
+    }
+  }
+
+  // Wompi redirige a /?pedido=REF&id=TX cuando el método de pago sale de la página (PSE, Nequi…).
+  function handleReturnFromPayment(){
+    const q = new URLSearchParams(location.search), ref = q.get("pedido");
+    if(!ref) return;
+    history.replaceState(null, "", location.pathname);
+    finishOrder(ref, q.get("id"));
+  }
+
+  function loadWompiWidget(){
+    return new Promise((resolve, reject) => {
+      if(window.WidgetCheckout) return resolve();
+      const sc = document.createElement("script");
+      sc.src = "https://checkout.wompi.co/widget.js"; sc.onload = resolve; sc.onerror = () => reject(new Error("widget"));
+      document.head.appendChild(sc);
+    });
+  }
+
+  async function submitCheckout(ev){
+    ev.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    const err = document.getElementById("coErr");
+    const data = {name:v("coName"), email:v("coEmail"), phone:v("coPhone").replace(/\D/g,""), city:v("coCity"), region:v("coRegion"), addr:v("coAddr"), notes:v("coNotes")};
+    if(!data.name || !data.email || !data.phone || !data.city || !data.region || !data.addr){ err.textContent = "Completa todos los datos de envío."; return false; }
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)){ err.textContent = "Escribe un correo válido."; return false; }
+    if(!/^3\d{9}$/.test(data.phone)){ err.textContent = "El celular debe tener 10 dígitos y empezar por 3 (ej. 3001234567)."; return false; }
+    if(!document.getElementById("coTerms").checked){ err.textContent = "Debes aceptar las condiciones de envíos y cambios para continuar."; return false; }
+    err.textContent = "";
+    const btn = document.getElementById("coPay");
+    btn.disabled = true; btn.textContent = "Reservando tu pedido…";
+    try{
+      const r = await fetch("/api/orders", {method:"POST", headers:{"Content-Type":"application/json"},
+        body: JSON.stringify({customer:data, acceptedTerms:true, items:Object.values(cart).map(({id,size,qty}) => ({id,size,qty}))})});
+      const j = await r.json().catch(() => ({}));
+      if(r.status === 409){ err.textContent = j.error || "Sin stock suficiente."; await refreshStock(); paintCheckoutSummary();
+        if(!Object.keys(cart).length) closeCheckout(); btn.disabled = false; btn.textContent = "Pagar de forma segura"; return false; }
+      if(!r.ok){ err.textContent = j.error || "No pudimos crear el pedido."; btn.disabled = false; btn.textContent = "Pagar de forma segura"; return false; }
+      activeOrder = {reference:j.reference, cancelable:true};
+
+      if(j.mock){                                           // ---- modo simulado ----
+        showDone("Pago simulado", `<p>Pedido <b>${esc(j.reference)}</b> por <b>${money(j.total)}</b>. Las unidades quedaron reservadas.</p>
+          <p class="co-note">Modo de pruebas: elige el resultado de la pasarela.</p>
+          <button class="co-pay" onclick="mockPay('${j.reference}','APPROVED')">Simular pago aprobado</button>
+          <button class="co-pay" style="background:var(--card);color:var(--ink);border:1px solid var(--line)" onclick="mockPay('${j.reference}','DECLINED')">Simular pago rechazado</button>`);
+        return false;
+      }
+      // ---- Wompi real: widget dentro de la página ----
+      await loadWompiWidget();
+      const c = j.checkout;
+      const widget = new WidgetCheckout({
+        currency: c.currency, amountInCents: c.amountInCents, reference: c.reference, publicKey: c.publicKey,
+        signature: {integrity: c.signatureIntegrity}, redirectUrl: c.redirectUrl,
+        customerData: {email:data.email, fullName:data.name, phoneNumber:data.phone, phoneNumberPrefix:"+57"},
+        shippingAddress: {addressLine1:data.addr, city:data.city, region:data.region, country:"CO", phoneNumber:data.phone}
+      });
+      widget.open(result => {
+        const tx = result && result.transaction;
+        if(tx && tx.id){ if(activeOrder) activeOrder.cancelable = false; finishOrder(c.reference, tx.id); }
+        else { backToForm(); err.textContent = "No completaste el pago. Tus productos siguen en el carrito."; cancelActiveOrder(); }
+      });
+      btn.disabled = false; btn.textContent = "Pagar de forma segura";
+    }catch(e){
+      err.textContent = "No pudimos conectar. Revisa tu conexión e inténtalo de nuevo.";
+      btn.disabled = false; btn.textContent = "Pagar de forma segura";
+    }
+    return false;
+  }
+
+  async function mockPay(reference, result){
+    if(activeOrder) activeOrder.cancelable = false;
+    await fetch("/api/dev/pay", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({reference, result})});
+    finishOrder(reference, null);
+  }
+</script>
+
+</body>
+</html>
